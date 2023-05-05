@@ -1,78 +1,59 @@
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+/* Center everything */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Style the player container */
+  #player-container {
+    max-width: 600px;
+    width: 100%;
     text-align: center;
   }
   
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+  #player-container h1 {
+    margin-bottom: 1rem;
   }
   
-  iframe {
-    margin-bottom: 20px;
+  /* Style the audio player iframe */
+  #audio-player {
+    margin-bottom: 1rem;
   }
   
-  .slider {
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 20px;
+  /* Style the slider containers */
+  .slider-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
   }
   
-  .slider label {
-    display: block;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
+  .slider-container label {
+    margin-right: 1rem;
   }
   
-  .slider input[type="range"] {
-    width: 100%;
+  /* Style the volume and frequency sliders */
+  input[type="range"] {
     -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  .slider input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: #4286f4;
-    cursor: pointer;
-  }
-  
-  .slider input[type="range"]::-moz-range-thumb {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: #4286f4;
-    cursor: pointer;
-  }
-  
-  .slider input[type="range"]:focus {
-    outline: none;
-  }
-  
-  .slider input[type="range"]:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 3px rgba(66, 134, 244, 0.4);
-  }
-  
-  .slider input[type="range"]:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 3px rgba(66, 134, 244, 0.4);
-  }
-  
-  button {
-    font-size: 1.2rem;
-    background-color: #4286f4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
+    height: 5px;
+    background: #d3d3d3;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
   }
   
-  button:hover {
-    background-color: #306cba;
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #ff5500;
+    border-radius: 50%;
+    cursor: pointer;
   }
   
