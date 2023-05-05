@@ -1,46 +1,20 @@
-// Select DOM elements
-const audioPlayer = document.querySelector('.audio-player');
-const audio = new Audio('audio/audio.mp3');
-const playPauseBtn = audioPlayer.querySelector('#play-pause-btn');
-const amplitudeSlider = audioPlayer.querySelector('#amplitude-slider');
-const frequencySlider = audioPlayer.querySelector('#frequency-slider');
-const progressBar = audioPlayer.querySelector('#progress-bar');
+// get the audio player iframe
+const audioPlayer = document.getElementById('audio-player');
 
-// Set audio properties
-audio.volume = amplitudeSlider.value;
-audio.playbackRate = frequencySlider.value;
+// get the volume slider and set the initial value to 50
+const volumeSlider = document.getElementById('volume-slider');
+audioPlayer.contentWindow.postMessage('{"type": "volume", "data": ' + volumeSlider.value / 100 + '}', '*');
 
-// Add event listeners
-playPauseBtn.addEventListener('click', togglePlayPause);
-amplitudeSlider.addEventListener('input', changeAmplitude);
-frequencySlider.addEventListener('input', changeFrequency);
-audio.addEventListener('timeupdate', updateProgress);
+// add event listener to volume slider
+volumeSlider.addEventListener('input', function() {
+  audioPlayer.contentWindow.postMessage('{"type": "volume", "data": ' + this.value / 100 + '}', '*');
+});
 
-// Toggle play and pause
-function togglePlayPause() {
-	if (audio.paused) {
-		audio.play();
-		playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
-	} else {
-		audio.pause();
-		playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
-	}
-}
+// get the frequency slider and set the initial value to 50
+const frequencySlider = document.getElementById('frequency-slider');
+audioPlayer.contentWindow.postMessage('{"type": "seek", "data": audioPlayer.contentWindow.SC.Widget.Events.SEEK + ': ' + audioPlayer.contentWindow.SC.Widget.Events.PLAY_PROGRESS + ': ' + (frequencySlider.value / 100) * audioPlayer.contentWindow.document.querySelector('.sound__waveform svg g').getTotalLength() + '}', '*');
 
-// Change amplitude
-function changeAmplitude() {
-	audio.volume = amplitudeSlider.value;
-}
-
-// Change frequency
-function changeFrequency() {
-	audio.playbackRate = frequencySlider.value;
-}
-
-// Update progress bar
-function updateProgress() {
-	const duration = audio.duration;
-	const currentTime = audio.currentTime;
-	const progress = (currentTime / duration) * 100;
-	progressBar.style.width = `${progress}%`;
-}
+// add event listener to frequency slider
+frequencySlider.addEventListener('input', function() {
+  audioPlayer.contentWindow.postMessage('{"type": "seek", "data": audioPlayer.contentWindow.SC.Widget.Events.SEEK + ': ' + audioPlayer.contentWindow.SC.Widget.Events.PLAY_PROGRESS + ': ' + (this.value / 100) * audioPlayer.contentWindow.document.querySelector('.sound__waveform svg g').getTotalLength() + '}', '*');
+});
