@@ -1,27 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Modulated Music Player</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <div id="player-container">
-      <h1>Modulated Music Player</h1>
-      <div id="audio-player">
-        <audio id="audio" controls src="progressive 1 master1.mp3"></audio>
-      </div>
-      <div id="controls">
-        <div class="slider-container">
-          <label for="volume-slider">Volume:</label>
-          <input id="volume-slider" type="range" min="0" max="100" step="1" value="50">
-        </div>
-        <div class="slider-container">
-          <label for="frequency-slider">Frequency:</label>
-          <input id="frequency-slider" type="range" min="0" max="100" step="1" value="50">
-        </div>
-      </div>
-    </div>
-    <script src="script.js"></script>
-  </body>
+<html>
+<head>
+	<title>Audio Player with Sliders</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="audio-player">
+		<audio src="./audio/sample.mp3" controls></audio>
+		<div id="slider-container">
+			<label for="volume-slider">Volume</label>
+			<input type="range" id="volume-slider" class="slider" min="0" max="100" value="50">
+			<label for="speed-slider">Speed</label>
+			<input type="range" id="speed-slider" class="slider" min="0" max="200" value="100">
+			<label for="pitch-slider">Pitch</label>
+			<input type="range" id="pitch-slider" class="slider" min="-12" max="12" value="0">
+		</div>
+		<button id="reset-button">Reset</button>
+	</div>
+	<script src="script.js"></script>
+</body>
 </html>

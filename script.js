@@ -1,19 +1,36 @@
-const audio = document.getElementById("audio");
-const volumeSlider = document.getElementById("volume-slider");
-const frequencySlider = document.getElementById("frequency-slider");
+// Get the audio element and all the sliders
+const audio = document.querySelector('audio');
+const volumeSlider = document.querySelector('#volume-slider');
+const speedSlider = document.querySelector('#speed-slider');
+const pitchSlider = document.querySelector('#pitch-slider');
+const resetButton = document.querySelector('#reset-button');
 
-// Set default values
-audio.volume = 0.5;
-let frequencyValue = 0.5;
+// Set the initial values of the sliders
+volumeSlider.value = 50;
+speedSlider.value = 100;
+pitchSlider.value = 0;
 
-// Function to update the frequency value and apply the modulation effect
-function updateFrequency() {
-  frequencyValue = frequencySlider.value / 100;
-  const modulatedValue = Math.sin(audio.currentTime * frequencyValue * 2 * Math.PI) * 0.1;
-  const volumeValue = volumeSlider.value / 100;
-  audio.volume = volumeValue + modulatedValue;
-}
+// Add event listeners to all the sliders
+volumeSlider.addEventListener('input', () => {
+	const volumeValue = volumeSlider.value;
+	audio.volume = volumeValue / 100;
+});
 
-// Attach event listeners to the sliders
-volumeSlider.addEventListener("input", updateFrequency);
-frequencySlider.addEventListener("input", updateFrequency);
+speedSlider.addEventListener('input', () => {
+	const speedValue = speedSlider.value;
+	audio.playbackRate = speedValue / 100;
+});
+
+pitchSlider.addEventListener('input', () => {
+	const pitchValue = pitchSlider.value;
+	const cents = 1200 * Math.log2(Math.pow(2, pitchValue / 12));
+	audio.playbackRate = Math.pow(2, cents / 1200);
+});
+
+resetButton.addEventListener('click', () => {
+	volumeSlider.value = 50;
+	speedSlider.value = 100;
+	pitchSlider.value = 0;
+	audio.volume = 0.5;
+	audio.playbackRate = 1;
+});
